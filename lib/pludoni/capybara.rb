@@ -20,10 +20,11 @@ module PoltergeistHelper
   # 404 Fehlern vorbeugen -> Wir haben paperclip tmp in usage, also werden
   # hochgeladene Logos nicht angezeigt
   # -> 404 -> Test Failure
-  def stub_logo!
+  def stub_logo!(object,method=:logo)
     logo = Object.new
-    def logo.url(whatever) "" end
-    Company.any_instance.stub :logo => logo
+    def logo.url(*whatever) "" end
+    def logo.method_missing(name,*args) true end
+    object.any_instance.stub method => logo, :"#{method}_file_name" => "foo.png"
   end
 
   # skip any confirm: "Really delete?"
