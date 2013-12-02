@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "poltergeist"
   spec.add_runtime_dependency "simplecov"
-  spec.add_runtime_dependency "simplecov-rcov-text"
+  # spec.add_runtime_dependency "simplecov-rcov-text"
   spec.add_runtime_dependency 'timecop'
   spec.add_runtime_dependency "guard-rspec"
   spec.add_runtime_dependency "capybara"
