@@ -6,12 +6,6 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
-# monkeypatch -> Transactions fuer Features
-ActiveRecord::ConnectionAdapters::ConnectionPool.class_eval do
-  def current_connection_id
-    Thread.main.object_id
-  end
-end
 
 RSpec.configure do |config|
   config.include PoltergeistHelper, type: :feature
