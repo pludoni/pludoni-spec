@@ -19,7 +19,6 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "poltergeist"
   spec.add_runtime_dependency "simplecov"
-  # spec.add_runtime_dependency "simplecov-rcov-text"
   spec.add_runtime_dependency 'timecop'
   spec.add_runtime_dependency "guard-rspec"
   spec.add_runtime_dependency "capybara"
@@ -27,6 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "rb-inotify"
   spec.add_runtime_dependency "pry-rails"
   spec.add_runtime_dependency "rspec-retry"
+  spec.add_runtime_dependency "database_cleaner"
   spec.add_runtime_dependency "i18n-missing_translations"
   spec.add_runtime_dependency 'action_mailer_cache_delivery'
 

@@ -62,6 +62,7 @@ describe MyController do
     # will check views if containing Missing Translations
   end
 end
+```
 
 ## spec tags:
 
@@ -92,6 +93,4 @@ end
   screenshot '1'          #screenshot to public/1.jpg
 
   skip_confirm(page) # will overwrite JS confirm method, so delete confirmations will work
-
-
 ```
