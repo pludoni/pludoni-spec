@@ -1,6 +1,7 @@
 require "pludoni/capybara"
 require "timecop"
 require 'i18n/missing_translations'
+require 'rspec/retry'
 at_exit { I18n.missing_translations.dump }
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
@@ -26,7 +27,7 @@ RSpec.configure do |config|
   #   end
   # end
 
-  config.after :each do
+  config.after :each, js: true do
     if example.exception.present? and example.metadata[:type] == :feature
       if defined? screenshot
         puts "made screenshot to /error.jpg"
@@ -70,6 +71,12 @@ RSpec.configure do |config|
     ActionController::Base.perform_caching = caching
   end
 
+  config.around(:each, :timeout) do |example|
+    time = 10 unless time.kind_of?(Numeric)
+    Timeout.timeout(time) do
+      example.run
+    end
+  end
 
 end
 
