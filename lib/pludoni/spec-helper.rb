@@ -1,7 +1,7 @@
 require "pludoni/capybara"
 require "timecop"
 require 'i18n/missing_translations'
-require 'rspec/retry'
+# require 'rspec/retry'
 at_exit { I18n.missing_translations.dump }
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
@@ -72,8 +72,12 @@ RSpec.configure do |config|
   end
 
   config.around(:each, :timeout) do |example|
-    time = 10 unless time.kind_of?(Numeric)
-    Timeout.timeout(time) do
+    if example.metadata[:timeout]
+      time = 10 unless time.kind_of?(Numeric)
+      Timeout.timeout(time) do
+        example.run
+      end
+    else
       example.run
     end
   end
