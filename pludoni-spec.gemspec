@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "pludoni-spec"
-  spec.version       = "0.0.1"
+  spec.version       = "0.0.2"
   spec.authors       = ["Stefan Wienert"]
   spec.email         = ["stefan.wienert@pludoni.de"]
   spec.description   = %q{Alles was man so braucht zum testen}

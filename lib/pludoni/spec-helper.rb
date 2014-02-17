@@ -1,4 +1,7 @@
 require "pludoni/capybara"
+RSpec.configure do |c|
+  c.treat_symbols_as_metadata_keys_with_true_values = true
+end
 require "timecop"
 require 'i18n/missing_translations'
 # require 'rspec/retry'
@@ -9,38 +12,17 @@ ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 
 RSpec.configure do |config|
-  config.include PoltergeistHelper, type: :feature
   config.infer_base_class_for_anonymous_controllers = false
   config.tty = true
   config.before do
-    # # WebMock.disable_net_connect!(:allow_localhost => true)
     ActionMailer::Base.deliveries.clear
-  end
-  # config.around(:each, type: :feature) do |example|
-  #   begin
-  #     require "action_mailer_cache_delivery"
-  #     ActionMailer::Base.delivery_method = :cache
-  #     ActionMailer::Base.clear_cache
-  #     example.run
-  #   ensure
-  #     ActionMailer::Base.delivery_method = :file
-  #   end
-  # end
-
-  config.after :each, js: true do |example|
-    exception = defined?(example.exception) ? example.exception : example.example.exception
-    if exception.present? and example.metadata[:type] == :feature and example.metadata[:js]
-      if defined? screenshot
-        puts "made screenshot to /error.jpg"
-        screenshot "error"
-      end
-    end
   end
 
   # Freeze Time using Timecop
   # freeze_time: "2012-09-01 12:12:12"
   config.around(:each) do |example|
-    if time = example.metadata[:freeze_time]
+    ex = defined?(example.example) ? example.example : example # rspec 2.14...
+    if time = ex.metadata[:freeze_time]
       begin
         Timecop.freeze(Time.parse(time)) do
           example.run
@@ -52,7 +34,6 @@ RSpec.configure do |config|
       example.run
     end
   end
-
 
   # Skip = pending all examples
   config.around(:each, :skip => true) do |example|
