@@ -28,7 +28,8 @@ RSpec.configure do |config|
   # end
 
   config.after :each, js: true do |example|
-    if example.exception.present? and example.metadata[:type] == :feature
+    exception = defined?(example.exception) ? example.exception : example.example.exception
+    if exception.present? and example.metadata[:type] == :feature and example.metadata[:js]
       if defined? screenshot
         puts "made screenshot to /error.jpg"
         screenshot "error"
