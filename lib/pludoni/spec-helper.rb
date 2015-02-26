@@ -68,8 +68,11 @@ end
 
 
 silence_warnings do
+  begin
   require "bcrypt"
   BCrypt::Engine::DEFAULT_COST = BCrypt::Engine::MIN_COST
+  rescue StandardError
+  end
 end
 
 require "pludoni/mail_helper"
