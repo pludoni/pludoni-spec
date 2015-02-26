@@ -1,6 +1,8 @@
 require "pludoni/capybara"
 RSpec.configure do |c|
-  c.treat_symbols_as_metadata_keys_with_true_values = true
+  if RSpec::Core::Version::STRING < '3.0.0'
+    c.treat_symbols_as_metadata_keys_with_true_values = true
+  end
 end
 require "timecop"
 require 'i18n/missing_translations'
@@ -8,7 +10,7 @@ require 'i18n/missing_translations'
 at_exit { I18n.missing_translations.dump }
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
-ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
+#ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 
 RSpec.configure do |config|
@@ -71,7 +73,7 @@ silence_warnings do
   begin
   require "bcrypt"
   BCrypt::Engine::DEFAULT_COST = BCrypt::Engine::MIN_COST
-  rescue LoadEerror
+  rescue LoadError
   end
 end
 
