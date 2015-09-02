@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "pludoni-spec"
-  spec.version       = "0.0.2"
+  spec.version       = "0.1.0"
   spec.authors       = ["Stefan Wienert"]
   spec.email         = ["stefan.wienert@pludoni.de"]
   spec.description   = %q{Alles was man so braucht zum testen}
@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "poltergeist"
   spec.add_runtime_dependency "simplecov"
+  spec.add_runtime_dependency "rspec", "~> 3.0"
   spec.add_runtime_dependency 'timecop'
   spec.add_runtime_dependency "capybara"
   spec.add_runtime_dependency "pry-rails"
