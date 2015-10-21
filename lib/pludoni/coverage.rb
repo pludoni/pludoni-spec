@@ -1,4 +1,4 @@
-if `whoami`["jenkins"]
+if `whoami`["jenkins"] || ENV['CI']
   require 'simplecov'
   # require 'simplecov-rcov-text'
   # class SimpleCov::Formatter::MergedFormatter
