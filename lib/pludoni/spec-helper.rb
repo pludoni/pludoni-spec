@@ -5,9 +5,12 @@ RSpec.configure do |c|
   end
 end
 require "timecop"
-require 'i18n/missing_translations'
-# require 'rspec/retry'
-at_exit { I18n.missing_translations.dump }
+begin
+  require 'i18n/missing_translations'
+  # require 'rspec/retry'
+  at_exit { I18n.missing_translations.dump }
+rescue LoadError
+end
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 #ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)

@@ -24,7 +24,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "capybara"
   spec.add_runtime_dependency "pry-rails"
   spec.add_runtime_dependency "database_cleaner"
-  spec.add_runtime_dependency "i18n-missing_translations"
   spec.add_runtime_dependency 'action_mailer_cache_delivery'
 
   spec.add_development_dependency "bundler", "~> 1.3"
