@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "poltergeist"
   spec.add_runtime_dependency "simplecov"
-  spec.add_runtime_dependency "rspec", "~> 3.0"
+  spec.add_runtime_dependency "rspec", ">= 2.14"
   spec.add_runtime_dependency 'timecop'
   spec.add_runtime_dependency "capybara"
   spec.add_runtime_dependency "pry-rails"
